@@ -1,4 +1,4 @@
-import { Children, useEffect, useState } from "react";
+import { Children, useState } from "react";
 
 const tempMovieData = [
   {
@@ -50,38 +50,9 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const KEY = `9e647cf1`;
-
 export default function App() {
-  const [watched, setWatched] = useState([]);
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState([false]);
-  const [isError, setIsError] = useState("");
-
-  const query = "prison";
-
-  useEffect(function () {
-    async function fetchMovies() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-        );
-
-        if (!res.ok) {
-          throw new Error("Movie didn't fetch");
-        }
-
-        const data = await res.json();
-        setMovies(data.Search);
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err.message);
-        setIsError(err.message);
-      }
-    }
-    fetchMovies();
-  }, []);
+  const [watched, setWatched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState(tempMovieData);
 
   return (
     <>
@@ -92,12 +63,8 @@ export default function App() {
       </NavBar>
       <Main>
         <Box>
-          {isLoading && <Loader />}
-          {!isLoading && !isError && <LeftMovie movies={movies} />}
-          {isError && <ErrorMessage message={isError} />}
+          <LeftMovie movies={movies} />
         </Box>
-
-        {/* {isLoading ? <Loader /> : <LeftMovie movies={movies} />} */}
         <Box>
           <RightWatchMovieSummary watched={watched} />
           <RightMovie watched={watched} />
@@ -105,18 +72,6 @@ export default function App() {
       </Main>
     </>
   );
-}
-
-function ErrorMessage({ message }) {
-  return (
-    <p className="error">
-      <span>🤖</span> {message}
-    </p>
-  );
-}
-
-function Loader() {
-  return <p className="loader">Please wait, app is loading...</p>;
 }
 
 function NavBar({ children }) {
