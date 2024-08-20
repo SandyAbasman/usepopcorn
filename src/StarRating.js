@@ -27,7 +27,7 @@ StarRating.propTypes = {
 export default function StarRating({
   maxRating = 5,
   color = "#fcc419",
-  size = 30,
+  size = 10,
   className = "",
   message = [],
   defaultRating = 0,
@@ -45,7 +45,7 @@ export default function StarRating({
     lineHeight: "1",
     margin: "0",
     color,
-    fontSize: size,
+    fontSize: "16px",
   };
   return (
     <div style={containerStyle} className={className}>
@@ -75,14 +75,13 @@ export default function StarRating({
   );
 }
 
-const starStyle = {
-  width: "40px",
-  height: "40px",
-  display: "block",
-  cursor: "pointer",
-};
-
 function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
+  const starStyle = {
+    width: size,
+    height: size,
+    display: "block",
+    cursor: "pointer",
+  };
   return (
     <span
       role="button"
