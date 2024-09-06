@@ -104,7 +104,7 @@ export default function App() {
 
       if (query.length < 3) {
         setMovies([]); // Clear movies if query is too short
-        setIsError(""); // Reset error state
+        setIsError(""); // Reset error state 
         return;
       }
 
@@ -162,7 +162,7 @@ export default function App() {
   );
 }
 
-// Component to display an error message
+// Component to display an error message ...
 function ErrorMessage({ message }) {
   return (
     <p className="error">
