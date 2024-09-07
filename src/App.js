@@ -172,6 +172,8 @@ function ErrorMessage({ message }) {
   );
 }
 
+//adding local storage
+
 // Component to display a loading message
 function Loader() {
   return <p className="loader">Loading...</p>;
